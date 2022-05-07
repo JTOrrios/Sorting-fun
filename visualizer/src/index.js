@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Header from './Header/Header';
+import ArrayArea from './ArrayArea/ArrayArea';
+import SocialLinks from './SocialLinks/SocialLinks';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Header />
+    <ArrayArea />
+    <SocialLinks />
   </React.StrictMode>
 );
 
