@@ -1,9 +1,11 @@
 import './ArrayArea.css';
 import React from 'react';
+import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations } from './SortingAlgo';
 
-const NUMBER_OF_ARRAY_BARS = 300;
+const NUMBER_OF_ARRAY_BARS = 50;
 const MIN_BAR_HEIGHT = 15;
 const MAX_BAR_HEIGHT = 500;
+//const delay = async (ms = 1) => new Promise(resolve => setTimeout(resolve,ms));
 
 function randomIntBetweenIntervals(min,max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -23,6 +25,8 @@ function swap(i, j, array) {
   array[j] = array[i];
   array[i] = b;
 }
+
+
 
 export default class ArrayArea extends React.Component{
   constructor(props) {
@@ -45,20 +49,19 @@ export default class ArrayArea extends React.Component{
     this.setState({array});
   }
 
-  bubbleSort = (array) => {
-    let isSorted = false;
-    let counter = 0;
-    while (!isSorted) {
-        isSorted = true;
-        for (let i = 0; i < array.length - 1 - counter; i++) {
-            if (array[i] > array[i + 1]) {
-                swap(i, i + 1, array);
-                isSorted = false;
-            }
-        }
-        counter += 1;
-    }
-    return array;
+  bubbleSort = () => {
+    let array = this.state.array;
+    bubbleSortAnimations(array);
+  }
+
+  insertionSort = () => {
+    let array = this.state.array;
+    insertionSortAnimations(array);
+  }
+
+  selectionSort = () => {
+    let array = this.state.array;
+    selectionSortAnimations(array);
   }
 
   testAlgorithms() {
@@ -69,8 +72,8 @@ export default class ArrayArea extends React.Component{
         array.push(randomIntBetweenIntervals(-1000,1000));
       }
       const jsSortedArray = array.slice().sort((a,b) => a - b);
-      const bubbleSortedArray = this.bubbleSort(array.slice());
-      console.log(arraysAreEqual(jsSortedArray, bubbleSortedArray));
+      const customSortedArray = this.insertionSort(array.slice());
+      console.log(arraysAreEqual(jsSortedArray, customSortedArray));
     }
   }
 
@@ -86,7 +89,8 @@ export default class ArrayArea extends React.Component{
             ))}
           </div>
           <button onClick={() => this.generateArray()}> Generate </button>
-          <button onClick={() => this.bubbleSort(array)}> Bubble Sort</button>
+          <button onClick={() => this.bubbleSort()}> Bubble Sort</button>
+          <button onClick={() => this.insertionSort()}>Insertion Sort</button>
           <button onClick={() => this.testAlgorithms()}> Testing </button>
       </section>
     );
