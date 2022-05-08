@@ -9,3 +9,13 @@
     font-size: calc(10px + 2vmin);
     color: white;
   } 
+
+  .array-container {
+    position: relative;
+  }
+
+  .array-bar {
+    width: 2px;
+    display: inline-block;
+    margin: 0 1px;
+  }
