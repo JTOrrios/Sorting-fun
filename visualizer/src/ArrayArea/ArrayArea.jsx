@@ -1,6 +1,7 @@
 import './ArrayArea.css';
 import React from 'react';
-import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations, heapSortAnimationas, quickSortAnimations, mergeSortAnimations } from './SortingAlgo';
+import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations, 
+        heapSortAnimationas, quickSortAnimations, mergeSortAnimations } from './SortingAlgo';
 
 const NUMBER_OF_ARRAY_BARS = 200;
 const MIN_BAR_HEIGHT = 15;
