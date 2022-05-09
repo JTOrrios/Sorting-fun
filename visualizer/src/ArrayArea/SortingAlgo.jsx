@@ -67,3 +67,83 @@ export async function selectionSortAnimations(array) {
     
 }
 
+//========================== HEAP SORT FUNCTION AND HELPERS ==============
+export async function heapSortAnimationas(array) {
+    buildMaxHeap(array)
+    for (let endIdx = array.length - 1; endIdx > 0; endIdx--) {
+        const arrayBars = document.getElementsByClassName('array-bar');
+        const barOneStyle = arrayBars[0].style;
+        const barTwoStyle = arrayBars[endIdx - 1].style;
+        barOneStyle.height = `${array[endIdx - 1]}px`;
+        barTwoStyle.height = `${array[0]}px`;
+        swap(0, endIdx, array);
+        siftDown(0, endIdx - 1, array);
+        await delay (40);
+    }
+}
+
+function buildMaxHeap(array) {
+    const firstParentIdx = Math.floor((array.length - 1) / 2);
+    for (let currentIdx = firstParentIdx; currentIdx >= 0; currentIdx--) {
+        siftDown(currentIdx, array.length - 1, array);
+    }
+}
+
+function siftDown(currentIdx, endIdx, heap) {
+    let childOneIdx = currentIdx * 2 + 1;
+    while (childOneIdx <= endIdx) {
+        const childTwoIdx = currentIdx * 2 + 2 <= endIdx ? currentIdx * 2 + 2 : -1;
+        let idxToSwap;
+        if (childTwoIdx > -1 && heap[childTwoIdx] > heap[childOneIdx]) {
+            idxToSwap = childTwoIdx;
+        } else {
+            idxToSwap = childOneIdx
+        }
+        if (heap[idxToSwap] > heap[currentIdx]) {
+            swap(currentIdx, idxToSwap, heap);
+            currentIdx = idxToSwap;
+            childOneIdx = currentIdx * 2 + 1;
+        } else {
+            return;
+        }
+    }
+}
+//==================== END OF HEAP SORT FUNCTION AND HELPERS ==============
+
+export async function quickSortAnimations(array, startIdx, endIdx) {
+    if (startIdx >= endIdx) return
+    let pivotIdx = startIdx;
+    let leftIdx = startIdx + 1;
+    let rightIdx = endIdx;
+    while (rightIdx >= leftIdx) {
+        const arrayBars = document.getElementsByClassName('array-bar');
+        const barOneStyle = arrayBars[leftIdx].style;
+        const barTwoStyle = arrayBars[rightIdx].style;
+        if (array[leftIdx] > array[pivotIdx] && array[rightIdx] < array[pivotIdx]) {
+            barOneStyle.height = `${array[rightIdx]}px`;
+            barTwoStyle.height = `${array[leftIdx]}px`;
+            swap(leftIdx, rightIdx, array);
+        }
+        if (array[leftIdx] <= array[pivotIdx]) {
+            leftIdx++;
+        }
+        if (array[rightIdx] >= array[pivotIdx]) {
+            rightIdx--;
+        }
+        await delay (12);
+    }
+    const arrayBars = document.getElementsByClassName('array-bar');
+    const barOneStyle = arrayBars[pivotIdx].style;
+    const barTwoStyle = arrayBars[rightIdx].style;
+    barOneStyle.height = `${array[rightIdx]}px`;
+    barTwoStyle.height = `${array[pivotIdx]}px`;
+    swap(pivotIdx, rightIdx, array)
+    let leftSubArraySmaller = rightIdx - 1 - startIdx < endIdx - (rightIdx + 1);
+    if (leftSubArraySmaller) {
+        quickSortAnimations(array, startIdx, rightIdx - 1);
+        quickSortAnimations(array, rightIdx + 1, endIdx);
+    } else {
+        quickSortAnimations(array, rightIdx + 1, endIdx);
+        quickSortAnimations(array, startIdx, rightIdx - 1);
+    }
+}

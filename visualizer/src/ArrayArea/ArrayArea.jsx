@@ -1,6 +1,6 @@
 import './ArrayArea.css';
 import React from 'react';
-import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations } from './SortingAlgo';
+import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations, heapSortAnimationas, quickSortAnimations } from './SortingAlgo';
 
 const NUMBER_OF_ARRAY_BARS = 50;
 const MIN_BAR_HEIGHT = 15;
@@ -64,6 +64,16 @@ export default class ArrayArea extends React.Component{
     selectionSortAnimations(array);
   }
 
+  heapSort = () => {
+    let array = this.state.array;
+    heapSortAnimationas(array);
+  }
+
+  quickSort = () => {
+    let array = this.state.array;
+    quickSortAnimations(array, 0, array.length - 1);
+  }
+
   testAlgorithms() {
     for (let i = 0; i < 100; i++) {
       const array = [];
@@ -92,6 +102,8 @@ export default class ArrayArea extends React.Component{
           <button onClick={() => this.bubbleSort()}> Bubble Sort</button>
           <button onClick={() => this.insertionSort()}>Insertion Sort</button>
           <button onClick={() => this.selectionSort()}>Selection Sort</button>
+          <button onClick={() => this.heapSort()}>Heap Sort</button>
+          <button onClick={() => this.quickSort()}>Quick Sort</button>
           <button onClick={() => this.testAlgorithms()}> Testing </button>
       </section>
     );
