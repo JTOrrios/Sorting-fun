@@ -147,3 +147,7 @@ export async function quickSortAnimations(array, startIdx, endIdx) {
         quickSortAnimations(array, startIdx, rightIdx - 1);
     }
 }
+
+export async function mergeSortAnimations(array) {
+    
+}
