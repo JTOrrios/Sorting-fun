@@ -2,7 +2,7 @@ import './ArrayArea.css';
 import React from 'react';
 import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations, heapSortAnimationas, quickSortAnimations, mergeSortAnimations } from './SortingAlgo';
 
-const NUMBER_OF_ARRAY_BARS = 100;
+const NUMBER_OF_ARRAY_BARS = 200;
 const MIN_BAR_HEIGHT = 15;
 const MAX_BAR_HEIGHT = 500;
 //const delay = async (ms = 1) => new Promise(resolve => setTimeout(resolve,ms));
@@ -20,13 +20,6 @@ function arraysAreEqual(arrOne, arrTwo) {
   }
   return true;
 }
-function swap(i, j, array) {
-  let b = array[j];
-  array[j] = array[i];
-  array[i] = b;
-}
-
-
 
 export default class ArrayArea extends React.Component{
   constructor(props) {
