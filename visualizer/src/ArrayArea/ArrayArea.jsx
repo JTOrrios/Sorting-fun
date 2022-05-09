@@ -88,9 +88,10 @@ export default class ArrayArea extends React.Component{
             }}></div>
             ))}
           </div>
-          <button onClick={() => this.generateArray()}> Generate </button>
+          <button onClick={() => this.generateArray()}> Generate New Array</button>
           <button onClick={() => this.bubbleSort()}> Bubble Sort</button>
           <button onClick={() => this.insertionSort()}>Insertion Sort</button>
+          <button onClick={() => this.selectionSort()}>Selection Sort</button>
           <button onClick={() => this.testAlgorithms()}> Testing </button>
       </section>
     );

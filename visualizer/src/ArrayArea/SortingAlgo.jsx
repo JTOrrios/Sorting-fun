@@ -55,9 +55,15 @@ export async function selectionSortAnimations(array) {
                 smallestIdx = i;
             }
         }
+        const arrayBars = document.getElementsByClassName('array-bar');
+        const barOneStyle = arrayBars[currentIdx].style;
+        const barTwoStyle = arrayBars[smallestIdx].style;
+        barOneStyle.height = `${array[smallestIdx]}px`;
+        barTwoStyle.height = `${array[currentIdx]}px`;
         swap(currentIdx, smallestIdx, array);
         currentIdx += 1;
+        await delay (100);
     }
-    return array;
+    
 }
 
