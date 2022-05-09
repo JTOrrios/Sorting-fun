@@ -73,8 +73,8 @@ export async function heapSortAnimationas(array) {
     for (let endIdx = array.length - 1; endIdx > 0; endIdx--) {
         const arrayBars = document.getElementsByClassName('array-bar');
         const barOneStyle = arrayBars[0].style;
-        const barTwoStyle = arrayBars[endIdx - 1].style;
-        barOneStyle.height = `${array[endIdx - 1]}px`;
+        const barTwoStyle = arrayBars[endIdx].style;
+        barOneStyle.height = `${array[endIdx]}px`;
         barTwoStyle.height = `${array[0]}px`;
         swap(0, endIdx, array);
         siftDown(0, endIdx - 1, array);

@@ -2,7 +2,7 @@ import './ArrayArea.css';
 import React from 'react';
 import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations, heapSortAnimationas, quickSortAnimations, mergeSortAnimations } from './SortingAlgo';
 
-const NUMBER_OF_ARRAY_BARS = 50;
+const NUMBER_OF_ARRAY_BARS = 100;
 const MIN_BAR_HEIGHT = 15;
 const MAX_BAR_HEIGHT = 500;
 //const delay = async (ms = 1) => new Promise(resolve => setTimeout(resolve,ms));
