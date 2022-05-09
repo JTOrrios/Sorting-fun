@@ -152,7 +152,6 @@ export async function mergeSortAnimations(array) {
         if (array.length <= 1) return array;
         let auxArray = array.slice()
         mergeSortHelper(array, 0, array.length - 1, auxArray)
-        return array;
 }
     
 function mergeSortHelper(mainArray, startIdx, endIdx, auxArray) {
@@ -168,21 +167,31 @@ function doMerge(mainArray, startIdx, midIdx, endIdx, auxArray) {
     let i = startIdx;
     let j = midIdx + 1;
     while (i <= midIdx && j <= endIdx) {
+        const arrayBars = document.getElementsByClassName('array-bar');
+        const barStyle = arrayBars[k].style; 
         if (auxArray[i] <= auxArray[j]) {
+            barStyle.height = `${auxArray[i]}`;
             mainArray[k] = auxArray[i];
             i++
         } else {
+            barStyle.height = `${auxArray[j]}`;
             mainArray[k] = auxArray[j]
             j++
         }
         k++
     }
     while (i <= midIdx) {
+        const arrayBars = document.getElementsByClassName('array-bar');
+        const barStyle = arrayBars[k].style;
+        barStyle.height = `${auxArray[i]}`;
         mainArray[k] = auxArray[i];
         i++;
         k++;
     }
     while (j <= endIdx) {
+        const arrayBars = document.getElementsByClassName('array-bar');
+        const barStyle = arrayBars[k].style;   
+        barStyle.height = `${auxArray[i]}`;
         mainArray[k] = auxArray[j];
         j++
         k++;
