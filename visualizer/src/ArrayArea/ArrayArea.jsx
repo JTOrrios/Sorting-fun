@@ -3,9 +3,10 @@ import React from 'react';
 import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations, 
         heapSortAnimationas, quickSortAnimations, mergeSortAnimations } from './SortingAlgo';
 
-const NUMBER_OF_ARRAY_BARS = 100;
+const NUMBER_OF_ARRAY_BARS = 400;
 const MIN_BAR_HEIGHT = 15;
 const MAX_BAR_HEIGHT = 500;
+const ANIMATIONS_SPEED_MS = 1;
 //const delay = async (ms = 1) => new Promise(resolve => setTimeout(resolve,ms));
 
 function randomIntBetweenIntervals(min,max) {
@@ -70,7 +71,15 @@ export default class ArrayArea extends React.Component{
 
   mergeSort = () => {
     let array = this.state.array;
-    mergeSortAnimations(array);
+    const animations = mergeSortAnimations(array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      setTimeout(()=>{
+        const [barOneIdx, newHeight] = animations[i];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        barOneStyle.height = `${newHeight}px`;
+      }, i * 10);
+    }
   }
 
   testAlgorithms() {

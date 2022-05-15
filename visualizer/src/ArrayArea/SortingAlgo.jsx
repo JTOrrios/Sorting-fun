@@ -1,4 +1,4 @@
-const delay = async (ms = 1) => new Promise(resolve => setTimeout(resolve,ms));
+const delay = async (ms = 5) => new Promise(resolve => setTimeout(resolve,ms));
 
 function swap(i, j, array) {
     let b = array[j];
@@ -13,12 +13,16 @@ export async function  bubbleSortAnimations(array){
     while(!isSorted) {
         isSorted = true;
         for (let i = 0; i < array.length - 1 - counter; i++) {
+
             const arrayBars = document.getElementsByClassName('array-bar');
             const barOneStyle = arrayBars[i].style;
             const barTwoStyle = arrayBars[i+1].style;
+
             if (array[i] > array[i+1]) {
+
                 barOneStyle.height = `${array[i+1]}px`;
                 barTwoStyle.height = `${array[i]}px`;
+                
                 swap(i, i + 1, array);
                 isSorted = false;
             }
@@ -33,11 +37,13 @@ export async function insertionSortAnimations(array) {
         let j = i;
 
         while (j > 0 && array[j] < array[j - 1]) {
+
             const arrayBars = document.getElementsByClassName('array-bar');
             const barOneStyle = arrayBars[j].style;
             const barTwoStyle = arrayBars[j-1].style;
             barOneStyle.height = `${array[j-1]}px`;
             barTwoStyle.height = `${array[j]}px`;
+
             swap(j, j - 1, array)
             j--;
         }
@@ -55,11 +61,13 @@ export async function selectionSortAnimations(array) {
                 smallestIdx = i;
             }
         }
+
         const arrayBars = document.getElementsByClassName('array-bar');
         const barOneStyle = arrayBars[currentIdx].style;
         const barTwoStyle = arrayBars[smallestIdx].style;
         barOneStyle.height = `${array[smallestIdx]}px`;
         barTwoStyle.height = `${array[currentIdx]}px`;
+
         swap(currentIdx, smallestIdx, array);
         currentIdx += 1;
         await delay (100);
@@ -71,11 +79,13 @@ export async function selectionSortAnimations(array) {
 export async function heapSortAnimationas(array) {
     buildMaxHeap(array)
     for (let endIdx = array.length - 1; endIdx > 0; endIdx--) {
+
         const arrayBars = document.getElementsByClassName('array-bar');
         const barOneStyle = arrayBars[0].style;
         const barTwoStyle = arrayBars[endIdx].style;
         barOneStyle.height = `${array[endIdx]}px`;
         barTwoStyle.height = `${array[0]}px`;
+
         swap(0, endIdx, array);
         siftDown(0, endIdx - 1, array);
         await delay (40);
@@ -100,6 +110,13 @@ function siftDown(currentIdx, endIdx, heap) {
             idxToSwap = childOneIdx
         }
         if (heap[idxToSwap] > heap[currentIdx]) {
+            
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const barOneStyle = arrayBars[currentIdx].style;
+            const barTwoStyle = arrayBars[idxToSwap].style;
+            barOneStyle.height = `${heap[idxToSwap]}px`;
+            barTwoStyle.height = `${heap[currentIdx]}px`;
+
             swap(currentIdx, idxToSwap, heap);
             currentIdx = idxToSwap;
             childOneIdx = currentIdx * 2 + 1;
@@ -116,12 +133,16 @@ export async function quickSortAnimations(array, startIdx, endIdx) {
     let leftIdx = startIdx + 1;
     let rightIdx = endIdx;
     while (rightIdx >= leftIdx) {
+
         const arrayBars = document.getElementsByClassName('array-bar');
         const barOneStyle = arrayBars[leftIdx].style;
         const barTwoStyle = arrayBars[rightIdx].style;
+
         if (array[leftIdx] > array[pivotIdx] && array[rightIdx] < array[pivotIdx]) {
+
             barOneStyle.height = `${array[rightIdx]}px`;
             barTwoStyle.height = `${array[leftIdx]}px`;
+
             swap(leftIdx, rightIdx, array);
         }
         if (array[leftIdx] <= array[pivotIdx]) {
@@ -132,11 +153,13 @@ export async function quickSortAnimations(array, startIdx, endIdx) {
         }
         await delay (12);
     }
+
     const arrayBars = document.getElementsByClassName('array-bar');
     const barOneStyle = arrayBars[pivotIdx].style;
     const barTwoStyle = arrayBars[rightIdx].style;
     barOneStyle.height = `${array[rightIdx]}px`;
     barTwoStyle.height = `${array[pivotIdx]}px`;
+
     swap(pivotIdx, rightIdx, array)
     let leftSubArraySmaller = rightIdx - 1 - startIdx < endIdx - (rightIdx + 1);
     if (leftSubArraySmaller) {
@@ -148,52 +171,49 @@ export async function quickSortAnimations(array, startIdx, endIdx) {
     }
 }
 
-export async function mergeSortAnimations(array) {
-        if (array.length <= 1) return array;
-        let auxArray = array.slice()
-        mergeSortHelper(array, 0, array.length - 1, auxArray)
+export function mergeSortAnimations(array) {
+    const animations = [];
+    if (array.length <= 1) return array;
+    const auxArray = array.slice();
+    mergeSortHelper(array, 0, array.length - 1, auxArray, animations);
+    return animations;
 }
     
-function mergeSortHelper(mainArray, startIdx, endIdx, auxArray) {
+function mergeSortHelper(mainArray, startIdx, endIdx, auxArray, animations) {
     if (startIdx === endIdx) return
-    let midIdx = Math.floor((startIdx + endIdx) / 2);
-    mergeSortHelper(auxArray, startIdx, midIdx, mainArray);
-    mergeSortHelper(auxArray, midIdx + 1, endIdx, mainArray);
-    doMerge(mainArray, startIdx, midIdx, endIdx, auxArray);
+    const midIdx = Math.floor((startIdx + endIdx) / 2);
+    mergeSortHelper(auxArray, startIdx, midIdx, mainArray, animations);
+    mergeSortHelper(auxArray, midIdx + 1, endIdx, mainArray, animations);
+    doMerge(mainArray, startIdx, midIdx, endIdx, auxArray, animations);
 }
 
-function doMerge(mainArray, startIdx, midIdx, endIdx, auxArray) {
+function doMerge(mainArray, startIdx, midIdx, endIdx, auxArray, animations) {
     let k = startIdx;
     let i = startIdx;
     let j = midIdx + 1;
+    
     while (i <= midIdx && j <= endIdx) {
-        const arrayBars = document.getElementsByClassName('array-bar');
-        const barStyle = arrayBars[k].style; 
-        if (auxArray[i] <= auxArray[j]) {
-            barStyle.height = `${auxArray[i]}`;
-            mainArray[k] = auxArray[i];
-            i++
-        } else {
-            barStyle.height = `${auxArray[j]}`;
-            mainArray[k] = auxArray[j]
-            j++
-        }
-        k++
+            if (auxArray[i] <= auxArray[j]) {
+                animations.push([k, auxArray[i]]);
+                mainArray[k] = auxArray[i];
+                i++;
+            } else {
+                animations.push([k, auxArray[j]]);
+                mainArray[k] = auxArray[j];
+                j++;
+            }
+            k++
     }
     while (i <= midIdx) {
-        const arrayBars = document.getElementsByClassName('array-bar');
-        const barStyle = arrayBars[k].style;
-        barStyle.height = `${auxArray[i]}`;
+        animations.push([k, auxArray[i]]);
         mainArray[k] = auxArray[i];
         i++;
         k++;
     }
     while (j <= endIdx) {
-        const arrayBars = document.getElementsByClassName('array-bar');
-        const barStyle = arrayBars[k].style;   
-        barStyle.height = `${auxArray[i]}`;
+        animations.push([k, auxArray[j]]);
         mainArray[k] = auxArray[j];
         j++
         k++;
-    }
+    } 
 }
