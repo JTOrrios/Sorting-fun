@@ -3,10 +3,9 @@ import React from 'react';
 import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations, 
         heapSortAnimationas, quickSortAnimations, mergeSortAnimations } from './SortingAlgo';
 
-const NUMBER_OF_ARRAY_BARS = 400;
+const NUMBER_OF_ARRAY_BARS = 375;
 const MIN_BAR_HEIGHT = 15;
 const MAX_BAR_HEIGHT = 500;
-const ANIMATIONS_SPEED_MS = 1;
 //const delay = async (ms = 1) => new Promise(resolve => setTimeout(resolve,ms));
 
 function randomIntBetweenIntervals(min,max) {
@@ -45,33 +44,88 @@ export default class ArrayArea extends React.Component{
   }
 
   bubbleSort = () => {
-    let array = this.state.array;
-    bubbleSortAnimations(array);
+    this.generateArray();
+    const animations = bubbleSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      setTimeout(()=>{
+        const [barOneIdx, newHeightOne] = animations[i][0];
+        const [barTwoIdx, newHeightTwo] = animations[i][1];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        barOneStyle.height = `${newHeightOne}px`;
+        barTwoStyle.height = `${newHeightTwo}px`;
+      }, i * 1);
+    }
   }
 
   insertionSort = () => {
-    let array = this.state.array;
-    insertionSortAnimations(array);
+    this.generateArray();
+    const animations = insertionSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      setTimeout(()=>{
+        const [barOneIdx, newHeightOne] = animations[i][0];
+        const [barTwoIdx, newHeightTwo] = animations[i][1];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        barOneStyle.height = `${newHeightOne}px`;
+        barTwoStyle.height = `${newHeightTwo}px`;
+      }, i * 1);
+    }
   }
 
-  selectionSort = () => {
-    let array = this.state.array;
-    selectionSortAnimations(array);
+  selectionSort = () => {    
+    this.generateArray();
+    const animations = selectionSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      setTimeout(()=>{
+        const [barOneIdx, newHeightOne] = animations[i][0];
+        const [barTwoIdx, newHeightTwo] = animations[i][1];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        barOneStyle.height = `${newHeightOne}px`;
+        barTwoStyle.height = `${newHeightTwo}px`;
+      }, i * 5);
+    }
   }
 
   heapSort = () => {
-    let array = this.state.array;
-    heapSortAnimationas(array);
+    this.generateArray();
+    const animations = heapSortAnimationas(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      setTimeout(()=>{
+        const [barOneIdx, newHeightOne] = animations[i][0];
+        const [barTwoIdx, newHeightTwo] = animations[i][1];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        barOneStyle.height = `${newHeightOne}px`;
+        barTwoStyle.height = `${newHeightTwo}px`;
+      }, i * 3);
+    }
   }
 
   quickSort = () => {
-    let array = this.state.array;
-    quickSortAnimations(array, 0, array.length - 1);
+    this.generateArray();
+    const animations = quickSortAnimations(this.state.array);
+    for (let i = 0; i < animations.length; i++) {
+      const arrayBars = document.getElementsByClassName('array-bar');
+      setTimeout(()=>{
+        const [barOneIdx, newHeightOne] = animations[i][0];
+        const [barTwoIdx, newHeightTwo] = animations[i][1];
+        const barOneStyle = arrayBars[barOneIdx].style;
+        const barTwoStyle = arrayBars[barTwoIdx].style;
+        barOneStyle.height = `${newHeightOne}px`;
+        barTwoStyle.height = `${newHeightTwo}px`;
+      }, i * 3);
+    }
   }
 
   mergeSort = () => {
-    let array = this.state.array;
-    const animations = mergeSortAnimations(array);
+    this.generateArray();
+    const animations = mergeSortAnimations(this.state.array);
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName('array-bar');
       setTimeout(()=>{
@@ -90,7 +144,7 @@ export default class ArrayArea extends React.Component{
         array.push(randomIntBetweenIntervals(-1000,1000));
       }
       const jsSortedArray = array.slice().sort((a,b) => a - b);
-      const customSortedArray = this.insertionSort(array.slice());
+      const customSortedArray = this.quickSortTest(array);
       console.log(arraysAreEqual(jsSortedArray, customSortedArray));
     }
   }
