@@ -3,7 +3,9 @@ import React from 'react';
 import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations, 
         heapSortAnimationas, quickSortAnimations, mergeSortAnimations } from './SortingAlgo';
 
-const NUMBER_OF_ARRAY_BARS = 375;
+let windowWidth = window.innerWidth * .4
+
+const NUMBER_OF_ARRAY_BARS = windowWidth / 2;
 const MIN_BAR_HEIGHT = 15;
 const MAX_BAR_HEIGHT = 500;
 //const delay = async (ms = 1) => new Promise(resolve => setTimeout(resolve,ms));
@@ -41,6 +43,7 @@ export default class ArrayArea extends React.Component{
       array.push(randomIntBetweenIntervals(MIN_BAR_HEIGHT, MAX_BAR_HEIGHT));
     }
     this.setState({array});
+    console.log(windowWidth);
   }
 
   bubbleSort = () => {
@@ -152,15 +155,9 @@ export default class ArrayArea extends React.Component{
   render = () => {
     const {array} = this.state;
     return (
-      <section className="ArrayArea">
-          <div className='array-container'>
-            {array.map((value, idx) => (
-              <div className='array-bar' key={idx}
-              style={{backgroundColor: 'white', height: `${value}px`,
-            }}></div>
-            ))}
-          </div>
-          <button onClick={() => this.generateArray()}> Generate New Array</button>
+      <div className='Header-and-ArrayArea'>
+        <header className='Header'>
+        <button onClick={() => this.generateArray()}> Generate New Array</button>
           <button onClick={() => this.bubbleSort()}> Bubble Sort</button>
           <button onClick={() => this.insertionSort()}>Insertion Sort</button>
           <button onClick={() => this.selectionSort()}>Selection Sort</button>
@@ -168,7 +165,17 @@ export default class ArrayArea extends React.Component{
           <button onClick={() => this.quickSort()}>Quick Sort</button>
           <button onClick={() => this.mergeSort()}>Merge Sort</button>
           <button onClick={() => this.testAlgorithms()}> Testing </button>
-      </section>
+        </header>
+        <section className="ArrayArea">
+            <div className='array-container'>
+              {array.map((value, idx) => (
+                <div className='array-bar' key={idx}
+                style={{backgroundColor: 'white', height: `${value}px`,
+              }}></div>
+              ))}
+            </div>
+        </section>
+      </div>
     );
   }
 }
