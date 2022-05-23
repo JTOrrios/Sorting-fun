@@ -9,6 +9,14 @@
   color: white;
 }
 
+.button-block {
+  width: 80vw;
+}
+
+button {
+  margin: 10px;
+}
+
 .ArrayArea {
     text-align: center;
     background-color: #8291ad;
@@ -30,3 +38,5 @@
     display: inline-block;
     margin: 0 1px;
   }
+
+ 

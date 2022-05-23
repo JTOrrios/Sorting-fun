@@ -1,5 +1,5 @@
 import './ArrayArea.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { bubbleSortAnimations, insertionSortAnimations, selectionSortAnimations, 
         heapSortAnimationas, quickSortAnimations, mergeSortAnimations } from './SortingAlgo';
 
@@ -157,14 +157,15 @@ export default class ArrayArea extends React.Component{
     return (
       <div className='Header-and-ArrayArea'>
         <header className='Header'>
-        <button onClick={() => this.generateArray()}> Generate New Array</button>
-          <button onClick={() => this.bubbleSort()}> Bubble Sort</button>
-          <button onClick={() => this.insertionSort()}>Insertion Sort</button>
-          <button onClick={() => this.selectionSort()}>Selection Sort</button>
-          <button onClick={() => this.heapSort()}>Heap Sort</button>
-          <button onClick={() => this.quickSort()}>Quick Sort</button>
-          <button onClick={() => this.mergeSort()}>Merge Sort</button>
-          <button onClick={() => this.testAlgorithms()}> Testing </button>
+          <div className='button-block'>
+            <button onClick={() => this.generateArray()}> Generate New Array</button>
+            <button onClick={() => this.bubbleSort()}> Bubble Sort</button>
+            <button onClick={() => this.insertionSort()}>Insertion Sort</button>
+            <button onClick={() => this.selectionSort()}>Selection Sort</button>
+            <button onClick={() => this.heapSort()}>Heap Sort</button>
+            <button onClick={() => this.quickSort()}>Quick Sort</button>
+            <button onClick={() => this.mergeSort()}>Merge Sort</button>
+          </div>
         </header>
         <section className="ArrayArea">
             <div className='array-container'>
